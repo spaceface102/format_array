@@ -22,19 +22,25 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 	such as %d, %c, etc.*/
 
 	int prev; //num of chars from last print
+	int new_line; //track if new_line
 	for(int i = 0, j = 0; i < array_size; i++)
 	{
 		prev = printf(specifier, *(array+(i*type_size))) + printf(", ");
 		j += prev;
+		new_line = 0;
 		if (j > max_chars)
 		{
 			i--; //need to reprint current index
 			j = 0; //reset char counter for next line
 			clear_chars(prev);
-			printf("\n");
+			new_line = printf("\n"); //will cause stdout flush and also new line!
 		}
 	}
-	clear_chars(2); //remove final ", "
+	if(!new_line)
+	{
+		clear_chars(2); //remove final ", "
+		printf("\n");
+	}
 }
 
 void clear_chars(int number)
