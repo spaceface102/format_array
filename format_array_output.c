@@ -56,7 +56,14 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 			case 'u': case 'o': case 'x': case 'X':
 				prev = printf(specifier, ((unsigned int *)array)[i]);
 				break;
-			case 's': //array of strings aka character pointers
+			case 'c': case 's': 
+				/*if 'c', specifier will ensure to print 
+				only one char, and will throw out error if
+				each index of the array is not a character 
+				but character pointer
+				if 's', specifier will ensure string are printed
+				therefore user passed in an array of character 
+				pointers, aka strings (think *argv[])        */
 				prev = printf(specifier, ((char *)array)[i]);
 				break;
 			case 'f':
@@ -70,9 +77,6 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 					prev = printf(specifier, ((double *)array)[i]);
 				if (type_size == 4) //float is 4 bytes
 					prev = printf(specifier, ((float *)array)[i]);
-			case 'c':
-				prev = printf(specifier, ((char *)array)[i]);
-				break;	
 			case 'p': //pointer address
 				prev = printf(specifier, ((uint64_t *)array)[i]); //64 bit word on my system
 				break;	
