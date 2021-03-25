@@ -71,6 +71,11 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 			case 'F': //I will be treating this as double
 				prev = printf(specifier, ((double *)array)[i]);
 				break;
+			case 'e': //scientific notation
+				if (type_size == 8) //double is 8 bytes
+					prev = printf(specifier, ((double *)array)[i]);
+				if (type_size == 4) //float is 4 bytes
+					prev = printf(specifier, ((float *)array)[i]);
 			case 'l':
 				if(spec_len == 3)
 				{
