@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <ctype.h>
 
-void clear_chars(int number)
-void repeat(char c, int number)
+void clear_chars(int number);
+void repeat(char c, int number);
 void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier);
 
 int main(void)
@@ -28,7 +28,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 		prev = printf(specifier, *(array+(i*type_size))) + printf(", ");
 		j += prev;
 		new_line = 0;
-		if (j > max_chars)
+		if (j > max_chars) //will only trip when extra chars are written to stdout
 		{
 			i--; //need to reprint current index
 			j = 0; //reset char counter for next line
