@@ -84,7 +84,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 			pointers, aka array of strings (think *argv[]) */
 			custom_print = print_char;
 			break;
-		case 'f':
+		case 'f': //although will print as double, still have to derefrence correctly
 			custom_print = print_float; 
 			break;
 		case 'F': //I will be treating this as double
