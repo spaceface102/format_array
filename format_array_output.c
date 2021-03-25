@@ -71,11 +71,17 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 			case 'F': //I will be treating this as double
 				prev = printf(specifier, ((double *)array)[i]);
 				break;
-			case 'e': //scientific notation
+			case 'e': case 'E'://scientific notation
 				if (type_size == 8) //double is 8 bytes
 					prev = printf(specifier, ((double *)array)[i]);
 				if (type_size == 4) //float is 4 bytes
 					prev = printf(specifier, ((float *)array)[i]);
+			case 'c':
+				prev = printf(specifier, ((char *)array)[i]);
+				break;	
+			case 'p': //pointer address
+				prev = printf(specifier, ((uint64_t *)array)[i]); //64 bit word on my system
+				break;	
 			case 'l':
 				if(spec_len == 3)
 				{
@@ -121,9 +127,6 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 					}
 				}
 				break;
-			case 'c':
-				prev = printf(specifier, ((char *)array)[i]);
-				break;	
 			default:
 				printf("Unknown specifier: %s\n", specifier);
 				return;
