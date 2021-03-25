@@ -160,7 +160,7 @@ void printarray(void *array, int array_size, int type_size, int max_chars_per_li
 		prev += printf(", ");
 		j += prev;
 		new_line = 0;
-		if (j > max_chars) //will only trip when extra chars are written to stdout
+		if (j > max_chars_per_line) //will only trip when extra chars are written to stdout
 		{
 			i--; //need to reprint current index
 			j = 0; //reset char counter for next line
