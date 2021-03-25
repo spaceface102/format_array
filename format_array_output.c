@@ -36,7 +36,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 	int spec_len = strlen(specifier);
 	
 	//second specifier check
-	if (spec_len <= 1)
+	if (spec_len <= 1) //aka < 2
 	{
 		printf("Please make sure to provide more than just %% as specifier!!!\n");
 		return;
@@ -89,7 +89,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 					prev = printf(specifier, ((uint8_t *)array)[i]);
 				break;	
 			case 'h':
-				if(spec_len >= 3) 
+				if(spec_len >= 3) //either 3 or 4 
 				{
 					switch(specifier[2])
 					{
@@ -117,7 +117,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 				}
 				break;
 			case 'l':
-				if(spec_len >= 3)
+				if(spec_len >= 3) //either 3 or 4
 				{
 					switch(specifier[2])
 					{
