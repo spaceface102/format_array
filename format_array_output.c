@@ -4,6 +4,8 @@
 
 void clear_chars(int number);
 void repeat(char c, int number);
+void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier);
+//-----ONLY USED TO DEFINE FUNCTION POINTER IN printarray()-----//
 int print_int(char *specifier, void *array, unsigned long i);
 int print_uint(char *specifier, void *array, unsigned long i);
 int print_char(char *specifier, void *array, unsigned long i);
@@ -21,7 +23,7 @@ int print_long_long_int(char *specifier, void *array, unsigned long i);
 int print_unsigned_long_int(char *specifier, void *array, unsigned long i);
 int print_unsigned_short_int(char *specifier, void *array, unsigned long i);
 int print_unsigned_long_long_int(char *specifier, void *array, unsigned long i);
-void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier);
+//end of function pointer inteneded functions
 
 int main(void)
 {
