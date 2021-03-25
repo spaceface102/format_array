@@ -59,7 +59,9 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 					if(specifier[2] == 'f')
 						prev = printf(specifier, ((double *)array)[i]);
 					else if(specifier[2] == 'd')
-						prev = printf(specifier, ((long int *)array)[i]);
+						prev = printf(specifier, ((long *)array)[i]);
+					else if(specifier[2] == 'u')
+						prev = printf(specifier, ((unsigned long *)array)[i]);
 					else if(specifier[2] == 'l')
 						prev = printf(specifier, ((long long int *)array)[i]);
 				}
