@@ -56,14 +56,30 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 			case 'l':
 				if(spec_len == 3)
 				{
-					if(specifier[2] == 'f')
-						prev = printf(specifier, ((double *)array)[i]);
-					else if(specifier[2] == 'd')
-						prev = printf(specifier, ((long int *)array)[i]);
-					else if(specifier[2] == 'u')
-						prev = printf(specifier, ((unsigned long int*)array)[i]);
-					else if(specifier[2] == 'l')
-						prev = printf(specifier, ((long long int *)array)[i]);
+					switch(specifier[2])
+					{
+						case 'f':
+							prev = printf(specifier, ((double *)array)[i]);
+							break;
+						case 'd': case 'i':
+							prev = printf(specifier, ((long int *)array)[i]);
+							break;
+						case 'u': case 'o': case 'x': case 'X':
+							prev = printf(specifier, ((unsigned long int*)array)[i]);
+							break;
+						case 'l':
+							prev = printf(specifier, ((long long int *)array)[i]);
+							break;
+					}
+				}
+				else if (spec_len == 4)
+				{
+					switch(specifier[3])
+					{
+						case 'u': case 'o': case 'x': case 'X':
+							prev = printf(specifier, ((unsigned long long int *)array)[i]);
+							break;
+					}
 				}
 				else
 					prev = printf(specifier, ((long int *)array)[i]);
@@ -74,8 +90,15 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 			case 'h':
 				if(spec_len == 3) 
 				{
-						prev = printf(specifier, ((short int *)array)[i]);
-						prev = printf(specifier, ((short int *)array)[i]);
+					switch(specifier[2])
+					{
+						case 'd': case 'i':
+							prev = printf(specifier, ((short int *)array)[i]);
+							break;
+						case 'u': case 'o': case 'x': case 'X':
+							prev = printf(specifier, ((unsigned short int *)array)[i]);
+							break;
+					}
 				}
 				break;
 			case 'c':
