@@ -166,7 +166,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 			new_line = printf("\n"); //will cause stdout flush and also new line!
 		}
 	}
-	//final clean up
+	//final clean up, loop terminated, but didn't trip 'if (j > max_chars)'
 	if(!new_line)
 	{
 		clear_chars(2); //remove final ", " they are extra and should be removed
