@@ -22,23 +22,26 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 	directly corresponding to the built in printf specifiers
 	such as %d, %c, etc.*/
 	
+	//initial check, since code depends heavily on value of specifier
 	if (specifier[0] != '%')
 	{
 		printf("Please provide a standard specifier such as %%d, %%f, %%lf, etc!\n");
 		return;
 	}
 
+	//------------------------------------------------------------------------
 	int prev; //num of chars from last print
 	int new_line; //track if new_line
 	int spec_len = strlen(specifier);
-
+	
+	//second specifier check
 	if (spec_len <= 1)
 	{
 		printf("Please make sure to provide more than just %% as specifier!!!\n");
 		return;
 	}
-
 	//------------------------------------------------------------------------
+
 	for(int i = 0, j = 0; i < array_size; i++)
 	{
 		//derefrence pointer correctly based on the specifier!
