@@ -84,7 +84,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 				prev = printf(specifier, ((uint64_t *)array)[i]); //64 bit word on my system
 				break;	
 			case 'h':
-				if(spec_len == 3) 
+				if(spec_len >= 3) 
 				{
 					switch(specifier[2])
 					{
@@ -112,7 +112,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 				}
 				break;
 			case 'l':
-				if(spec_len == 3)
+				if(spec_len >= 3)
 				{
 					switch(specifier[2])
 					{
@@ -126,16 +126,18 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 							prev = printf(specifier, ((unsigned long int*)array)[i]);
 							break;
 						case 'l':
-							prev = printf(specifier, ((long long int *)array)[i]);
-							break;
-					}
-				}
-				else if (spec_len == 4)
-				{
-					switch(specifier[3])
-					{
-						case 'u': case 'o': case 'x': case 'X':
-							prev = printf(specifier, ((unsigned long long int *)array)[i]);
+							if (spec_len == 4)
+							{
+								switch(specifier[3])
+								{
+									case 'd': case 'i':
+										prev = printf(specifier, ((long long int *)array)[i]);
+										break;
+									case 'u': case 'o': case 'x': case 'X':
+										prev = printf(specifier, ((unsigned long long int *)array)[i]);
+										break;
+								}
+							}
 							break;
 					}
 				}
