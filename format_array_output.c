@@ -4,6 +4,23 @@
 
 void clear_chars(int number);
 void repeat(char c, int number);
+int print_int(char *specifier, void *array, unsigned long i /*index*/);
+int print_uint(char *specifier, void *array, unsigned long i /*index*/);
+int print_char(char *specifier, void *array, unsigned long i /*index*/);
+int print_float(char *specifier, void *array, unsigned long i /*index*/);
+int print_double(char *specifier, void *array, unsigned long i /*index*/);
+int print_uint8(char *specifier, void *array, unsigned long i /*index*/);
+int print_uint16(char *specifier, void *array, unsigned long i /*index*/);
+int print_uint32(char *specifier, void *array, unsigned long i /*index*/);
+int print_uint64(char *specifier, void *array, unsigned long i /*index*/);
+int print_short_int(char *specifier, void *array, unsigned long i /*index*/);
+int print_unsigned_short_int(char *specifier, void *array, unsigned long i /*index*/);
+int print_signed_char(char *specifier, void *array, unsigned long i /*index*/);
+int print_unsigned_char(char *specifier, void *array, unsigned long i /*index*/);
+int print_long_int(char *specifier, void *array, unsigned long i /*index*/);
+int print_unsigned_long_int(char *specifier, void *array, unsigned long i /*index*/);
+int print_long_long_int(char *specifier, void *array, unsigned long i /*index*/);
+int print_unsigned_long_long_int(char *specifier, void *array, unsigned long i /*index*/);
 void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier);
 
 int main(void)
