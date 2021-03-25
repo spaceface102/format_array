@@ -47,6 +47,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 	{
 		//------------------------------------------------------------------------
 		//derefrence pointer correctly based on the specifier!
+		//https://www.cplusplus.com/reference/cstdio/printf/ 
 		switch(specifier[1]) //already check specifier[0] && strlen
 		{
 			case 'd': case 'i':
@@ -82,6 +83,22 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 			case 'p': //pointer address
 				prev = printf(specifier, ((uint64_t *)array)[i]); //64 bit word on my system
 				break;	
+			case 'h':
+				if(spec_len == 3) 
+				{
+					switch(specifier[2])
+					{
+						case 'd': case 'i':
+							prev = printf(specifier, ((short int *)array)[i]);
+							break;
+						case 'u': case 'o': case 'x': case 'X':
+							prev = printf(specifier, ((unsigned short int *)array)[i]);
+							break;
+						case 'h':
+
+					}
+				}
+				break;
 			case 'l':
 				if(spec_len == 3)
 				{
@@ -112,20 +129,6 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 				}
 				else //spec_len == 2
 					prev = printf(specifier, ((long int *)array)[i]);
-				break;
-			case 'h':
-				if(spec_len == 3) 
-				{
-					switch(specifier[2])
-					{
-						case 'd': case 'i':
-							prev = printf(specifier, ((short int *)array)[i]);
-							break;
-						case 'u': case 'o': case 'x': case 'X':
-							prev = printf(specifier, ((unsigned short int *)array)[i]);
-							break;
-					}
-				}
 				break;
 			default:
 				printf("Unknown specifier: %s\n", specifier);
