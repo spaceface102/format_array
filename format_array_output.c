@@ -162,7 +162,7 @@ void printarray(void *array, int array_size, int type_size, int max_chars, char 
 		{
 			i--; //need to reprint current index
 			j = 0; //reset char counter for next line
-			clear_chars(prev);
+			clear_chars(prev); //remove extra characters to avoid copies
 			new_line = printf("\n"); //will cause stdout flush and also new line!
 		}
 	}
