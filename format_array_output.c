@@ -31,7 +31,7 @@ int main(void)
 	float array[1000];
 	for(int i = 0; i < 1000; i++)
 		array[i] = i*1e10;
-	printarray(array, 1000, sizeof(int), 80, "%f");
+	printarray(array, 1000, sizeof(float), 80, "%f");
 }
 
 void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier)
