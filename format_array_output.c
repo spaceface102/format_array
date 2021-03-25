@@ -162,7 +162,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 			curr += printf("0x");
 		else if (base_specifier[1] == 'X')
 			curr += printf("0X");
-		curr += custom_print(specifier, array, i) 
+		curr += custom_print(specifier, array, i)  //custom_print is func pointer
 		curr += printf(", ");
 		j += curr;
 		new_line = 0;
