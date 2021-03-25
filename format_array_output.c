@@ -63,7 +63,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 				but character pointer
 				if 's', specifier will ensure string are printed
 				therefore user passed in an array of character 
-				pointers, aka strings (think *argv[])        */
+				pointers, aka array of strings (think *argv[]) */
 				prev = printf(specifier, ((char *)array)[i]);
 				break;
 			case 'f':
