@@ -28,6 +28,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 	//[5] since at most %lld or something to that effect (4 chars + null char)
 	char base_specifier[5], base_spec_len;
 	base_spec_len = specifier_strip(specifier, base_specifier, 5); 
+
 	if (base_specifier[0] != '%')
 	{
 		printf("Please provide a standard specifier such as %%d, %%f, %%lf, etc!\n");
@@ -35,8 +36,6 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 	}
 
 	//------------------------------------------------------------------------
-	int prev; //num of chars from last print
-	int new_line; //track if new_line
 	int (*custom_print)(char *specifier, void *array, unsigned long i);
 	//second specifier check
 	if (base_spec_len <= 1) //aka < 2
@@ -88,9 +87,9 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 				custom_print = print_uint8;
 			break;	
 		case 'h':
-			if(spec_len >= 3) //either 3 or 4 
+			if(base_spec_len >= 3) //either 3 or 4 
 			{
-				switch(specifier[2])
+				switch(base_specifier[2])
 				{
 					case 'd': case 'i':
 						custom_print = print_short_int;
@@ -99,9 +98,9 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 						custom_print = print_unsigned_short_int;
 						break; 
 					case 'h':	
-						if(spec_len == 4)
+						if(base_spec_len == 4)
 						{
-							switch(specifier[3])
+							switch(base_specifier[3])
 							{
 								case 'd': case 'i':
 									custom_print = print_signed_char;
@@ -116,9 +115,9 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 			}
 			break;
 		case 'l':
-			if(spec_len >= 3) //either 3 or 4
+			if(base_spec_len >= 3) //either 3 or 4
 			{
-				switch(specifier[2])
+				switch(base_specifier[2])
 				{
 					case 'f':
 						custom_print = print_double;
@@ -130,9 +129,9 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 						custom_print = print_unsigned_long_int;
 						break;
 					case 'l':
-						if (spec_len == 4)
+						if (base_spec_len == 4)
 						{
-							switch(specifier[3])
+							switch(base_specifier[3])
 							{
 								case 'd': case 'i':
 									custom_print = print_long_long_int;
@@ -145,7 +144,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 						break;
 				}
 			}
-			else //spec_len == 2
+			else //base_spec_len == 2
 				custom_print = print_long_int;
 			break;
 		default:
@@ -153,19 +152,25 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 			return;
 	}
 	//------------------------------------------------------------------------
+	int curr; //num of chars from last print
+	int new_line; //track if new_line
 	
-	for(int i = 0, j = 0; i < array_size; i++)
+	for(unsigned long int i = 0, j = 0; i < array_size; i++)
 	{
-		prev = 0;
-
-		prev += printf(", ");
-		j += prev;
+		curr = 0;
+		if (base_specifier[1] == 'x')
+			curr += printf("0x");
+		else if (base_specifier[1] == 'X')
+			curr += printf("0X");
+		curr += custom_print(specifier, array, i) 
+		curr += printf(", ");
+		j += curr;
 		new_line = 0;
 		if (j > max_chars_per_line) //will only trip when extra chars are written to stdout
 		{
 			i--; //need to reprint current index
 			j = 0; //reset char counter for next line
-			clear_chars(prev); //remove extra characters to avoid copies
+			clear_chars(curr); //remove extra characters to avoid copies
 			new_line = printf("\n"); //will cause stdout flush and also new line!
 		}
 	}
