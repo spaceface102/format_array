@@ -50,10 +50,10 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 	switch(specifier[1]) //already check specifier[0] && strlen
 	{
 		case 'd': case 'i': 
-			custom_print = print_i;
+			custom_print = print_int;
 			break;
 		case 'u': case 'o': case 'x': case 'X':
-			custom_print = print_ui;
+			custom_print = print_uint; //unsigned
 			break;
 		case 'c': case 's': 
 			/*if 'c', specifier will ensure to print 
@@ -63,9 +63,10 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 			if 's', specifier will ensure string are printed
 			therefore user passed in an array of character 
 			pointers, aka array of strings (think *argv[]) */
-			prev = printf(specifier, ((char *)array)[i]);
+			custom_print = print_char;
 			break;
 		case 'f':
+			custom_print = 
 			prev = printf(specifier, ((float *)array)[i]);
 			break;
 		case 'F': //I will be treating this as double
