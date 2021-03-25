@@ -66,27 +66,26 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 			custom_print = print_char;
 			break;
 		case 'f':
-			custom_print = 
-			prev = printf(specifier, ((float *)array)[i]);
+			custom_print = print_float; 
 			break;
 		case 'F': //I will be treating this as double
-			prev = printf(specifier, ((double *)array)[i]);
+			custom_print = print_double;
 			break;
 		case 'e': case 'E'://scientific notation
 			if (type_size == 8) //double is 8 bytes
-				prev = printf(specifier, ((double *)array)[i]);
+				custom_print = print_double;
 			else if (type_size == 4) //float is 4 bytes
-				prev = printf(specifier, ((float *)array)[i]);
+				custom_print = print_float;
 			break;
 		case 'p': //pointer address
 			if (type_size == 8) //64 bit system
-				prev = printf(specifier, ((uint64_t *)array)[i]);
+				custom_print = print_uint64;
 			else if (type_size == 4) //32 bit system
-				prev = printf(specifier, ((uint32_t *)array)[i]);
+				custom_print = print_uint32;
 			else if (type_size == 2) //16 bit system
-				prev = printf(specifier, ((uint16_t *)array)[i]);
+				custom_print = print_uint16;
 			else if (type_size == 1) //8 bit system
-				prev = printf(specifier, ((uint8_t *)array)[i]);
+				custom_print = print_uint8;
 			break;	
 		case 'h':
 			if(spec_len >= 3) //either 3 or 4 
@@ -94,10 +93,10 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 				switch(specifier[2])
 				{
 					case 'd': case 'i':
-						prev = printf(specifier, ((short int *)array)[i]);
+						custom_print = print_short_int;
 						break;
 					case 'u': case 'o': case 'x': case 'X':
-						prev = printf(specifier, ((unsigned short int *)array)[i]);
+						custom_print = print_unsigned_short_int;
 						break; 
 					case 'h':	
 						if(spec_len == 4)
@@ -105,10 +104,10 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 							switch(specifier[3])
 							{
 								case 'd': case 'i':
-									prev = printf(specifier, ((signed char *)array)[i]);
+									custom_print = print_signed_char;
 									break;
 								case 'u': case 'o': case 'x': case 'X':
-									prev = printf(specifier, ((unsigned char *)array)[i]);
+									custom_print = print_unsigned_char;
 									break;
 							}
 						}
@@ -122,13 +121,13 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 				switch(specifier[2])
 				{
 					case 'f':
-						prev = printf(specifier, ((double *)array)[i]);
+						custom_print = print_double;
 						break;
 					case 'd': case 'i':
-						prev = printf(specifier, ((long int *)array)[i]);
+						custom_print = print_long_int;
 						break;
 					case 'u': case 'o': case 'x': case 'X':
-						prev = printf(specifier, ((unsigned long int*)array)[i]);
+						custom_print = print_unsigned_long_int;
 						break;
 					case 'l':
 						if (spec_len == 4)
@@ -136,10 +135,10 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 							switch(specifier[3])
 							{
 								case 'd': case 'i':
-									prev = printf(specifier, ((long long int *)array)[i]);
+									custom_print = print_long_long_int;
 									break;
 								case 'u': case 'o': case 'x': case 'X':
-									prev = printf(specifier, ((unsigned long long int *)array)[i]);
+									custom_print = print_unsigned_long_long_int;
 									break;
 							}
 						}
@@ -147,15 +146,17 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 				}
 			}
 			else //spec_len == 2
-				prev = printf(specifier, ((long int *)array)[i]);
+				custom_print = print_long_int;
 			break;
 		default:
 			printf("Unknown specifier: %s\n", specifier);
 			return;
 	}
 	//------------------------------------------------------------------------
+	
 	for(int i = 0, j = 0; i < array_size; i++)
 	{
+		prev = 0;
 
 		prev += printf(", ");
 		j += prev;
