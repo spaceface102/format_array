@@ -4,7 +4,7 @@
 
 void clear_chars(int number);
 void repeat(char c, int number);
-void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier);
+void format_array_output(void *array, int array_size, int max_chars, char *specifier);
 
 int main(void)
 {
@@ -12,7 +12,7 @@ int main(void)
 	printf(spec, 42);
 }
 
-void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier)
+void format_array_output(void *array, int array_size, int max_chars, char *specifier)
 {
 	/*void pointer for array, to accept any type of array
 	array_size necessary to ONLY access memory related to
@@ -22,7 +22,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 	directly corresponding to the built in printf specifiers
 	such as %d, %c, etc.*/
 	
-	if (specifier[0] != '%' && str)
+	if (specifier[0] != '%')
 	{
 		printf("Please provide a standard specifier such as %%d, %%f, %%lf, etc!\n");
 		return;
@@ -30,10 +30,35 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 
 	int prev; //num of chars from last print
 	int new_line; //track if new_line
+	int spec_len = strlen(specifier);
+
+	if (spec_len <= 1)
+	{
+		printf("Please make sure to provide more than just %% as specifier!!!\n");
+		return;
+	}
+
 	for(int i = 0, j = 0; i < array_size; i++)
 	{
-		switch(specifier[1]) //already check specifier[0] 
-		prev = printf(specifier, *(char *)(array+(i*type_size))) + printf(", ");
+		//derefrence pointer correctly!
+		switch(specifier[1]) //already check specifier[0] && strlen
+		{
+			case 'd': case 'i':
+				prev = printf(specifier, ((int *)array)[i]);
+				break;
+			case 'f':
+				prev = printf(specifier, ((float *)array)[i]);
+				break;
+			case 'l':
+				if(strlen >= 3 && specifier[2] == 'f')
+					prev = printf(specifier, ((double *)array)[i]);
+				break;
+			default:
+				printf("Unknown specifier: %s\n", specifier);
+				return;
+		}
+
+		prev += printf(", ");
 		j += prev;
 		new_line = 0;
 		if (j > max_chars) //will only trip when extra chars are written to stdout
