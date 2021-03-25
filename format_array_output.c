@@ -4,6 +4,7 @@
 
 void clear_chars(int number);
 void repeat(char c, int number);
+int specifier_strip(char *specifier, char *base_specifier, int size_base);
 void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier);
 //-----ONLY USED TO DEFINE FUNCTION POINTER IN printarray()-----//
 int print_int(char *specifier, void *array, unsigned long i);
@@ -181,7 +182,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 			curr += printf("0x");
 		else if (base_specifier[1] == 'X')
 			curr += printf("0X");
-		curr += custom_print(specifier, array, i)  //custom_print is func pointer
+		curr += custom_print(specifier, array, i);  //custom_print is func pointer
 		curr += printf(", ");
 		j += curr;
 		new_line = 0;
@@ -213,7 +214,7 @@ int specifier_strip(char *specifier, char *base_specifier, int size_base)
 		switch(specifier[i])
 		{
 			case 'd': case 'i': case 'u': case 'o': case 'x':
-			case 'X': case 'f': case 'f': case 'e': case 'E':
+			case 'X': case 'f': case 'F': case 'e': case 'E':
 			case 'c': case 's': case '%': case 'h': case 'l':
 				base_specifier[j++] = specifier[i];
 				break;
