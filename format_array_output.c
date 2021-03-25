@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 void clear_chars(int number);
 void repeat(char c, int number);
@@ -20,12 +21,19 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 	max_chars per line. The character specifier is a string
 	directly corresponding to the built in printf specifiers
 	such as %d, %c, etc.*/
+	
+	if (specifier[0] != '%' && str)
+	{
+		printf("Please provide a standard specifier such as %%d, %%f, %%lf, etc!\n");
+		return;
+	}
 
 	int prev; //num of chars from last print
 	int new_line; //track if new_line
 	for(int i = 0, j = 0; i < array_size; i++)
 	{
-		prev = printf(specifier, *(array+(i*type_size))) + printf(", ");
+		switch(specifier[1]) //already check specifier[0] 
+		prev = printf(specifier, *(char *)(array+(i*type_size))) + printf(", ");
 		j += prev;
 		new_line = 0;
 		if (j > max_chars) //will only trip when extra chars are written to stdout
