@@ -77,8 +77,16 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 					prev = printf(specifier, ((double *)array)[i]);
 				if (type_size == 4) //float is 4 bytes
 					prev = printf(specifier, ((float *)array)[i]);
+				break;
 			case 'p': //pointer address
-				prev = printf(specifier, ((uint64_t *)array)[i]); //64 bit word on my system
+				if (type_size == 8) //64 bit system
+					prev = printf(specifier, ((uint64_t *)array)[i]);
+				if (type_size == 4) //32 bit system
+					prev = printf(specifier, ((uint32_t *)array)[i]);
+				if (type_size == 2) //16 bit system
+					prev = printf(specifier, ((uint16_t *)array)[i]);
+				if (type_size == 1) //8 bit system
+					prev = printf(specifier, ((uint8_t *)array)[i]);
 				break;	
 			case 'h':
 				if(spec_len >= 3) 
