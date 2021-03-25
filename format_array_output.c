@@ -6,7 +6,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 int main(void)
 {
 	char spec[] = "%d";
-	printf("%s\n", spec);
+	printf(spec, 42);
 }
 
 void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier)
