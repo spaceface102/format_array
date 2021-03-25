@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdint.h>
 
 void clear_chars(int number);
 void repeat(char c, int number);
-void format_array_output(void *array, int array_size, int max_chars, char *specifier);
+void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier);
 
 int main(void)
 {
@@ -12,7 +13,7 @@ int main(void)
 	printf(spec, 42);
 }
 
-void format_array_output(void *array, int array_size, int max_chars, char *specifier)
+void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier)
 {
 	/*void pointer for array, to accept any type of array
 	array_size necessary to ONLY access memory related to
@@ -44,14 +45,31 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 
 	for(int i = 0, j = 0; i < array_size; i++)
 	{
+		//------------------------------------------------------------------------
 		//derefrence pointer correctly based on the specifier!
 		switch(specifier[1]) //already check specifier[0] && strlen
 		{
 			case 'd': case 'i':
 				prev = printf(specifier, ((int *)array)[i]);
 				break;
+			case 'u': 
+				prev = printf(specifier, ((unsigned int *)array)[i]);
+				break;
+			case 'o': case 'x': case 'X':
+				if (type_size == 4) //4 bytes 32 bits
+					prev = printf(specifier, ((uint32_t *)array)[i]);
+				else if (type_size == 8) //8 bytes 64 bits
+					prev = printf(specifier, ((uint64_t *)array)[i]);
+				else if (type_size == 1) //1 bytes 8 bits
+					prev = printf(specifier, ((uint8_t *)array)[i]);
+				else if (type_size == 2) //2 bytes 16 bits
+					prev = printf(specifier, ((uint16_t *)array)[i]);
+				break;
 			case 'f':
 				prev = printf(specifier, ((float *)array)[i]);
+				break;
+			case 'F': //I will be treating this as double
+				prev = printf(specifier, ((double *)array)[i]);
 				break;
 			case 'l':
 				if(spec_len == 3)
@@ -81,11 +99,8 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 							break;
 					}
 				}
-				else
+				else //spec_len == 2
 					prev = printf(specifier, ((long int *)array)[i]);
-				break;
-			case 'u': 
-				prev = printf(specifier, ((unsigned int *)array)[i]);
 				break;
 			case 'h':
 				if(spec_len == 3) 
@@ -109,6 +124,7 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 				return;
 		}
 		//------------------------------------------------------------------------
+
 		prev += printf(", ");
 		j += prev;
 		new_line = 0;
