@@ -72,10 +72,11 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 				prev = printf(specifier, ((unsigned int *)array)[i]);
 				break;
 			case 'h':
-				if(spec_len == 2)
-					prev = printf(specifier, ((short int *)array)[i]);
-				else if(spec_len == 3 && specifier[2] == 'u') 
-					prev = printf(specifier, ((short int *)array)[i]);
+				if(spec_len == 3) 
+				{
+						prev = printf(specifier, ((short int *)array)[i]);
+						prev = printf(specifier, ((short int *)array)[i]);
+				}
 				break;
 			case 'c':
 				prev = printf(specifier, ((char *)array)[i]);
