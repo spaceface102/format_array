@@ -50,8 +50,13 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 				prev = printf(specifier, ((float *)array)[i]);
 				break;
 			case 'l':
-				if(spec_len == 3 && specifier[2] == 'f')
-					prev = printf(specifier, ((double *)array)[i]);
+				if(spec_len == 3)
+				{
+					if(specifier[2] == 'f')
+						prev = printf(specifier, ((double *)array)[i]);
+					else if(specifier[2] == 'd')
+						prev = printf(specifier, ((long int *)array)[i]);
+				}
 				break;
 			case 'u': 
 				prev = printf(specifier, ((unsigned int *)array)[i]);
@@ -59,12 +64,12 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 			case 'h':
 				if(spec_len == 2)
 					prev = printf(specifier, ((short int *)array)[i]);
-				else if (spec_len == 3 && specifier[2] == 'u') 
+				else if(spec_len == 3 && specifier[2] == 'u') 
 					prev = printf(specifier, ((short int *)array)[i]);
 				break;
 			case 'c':
 				prev = printf(specifier, ((char *)array)[i]);
-				
+				break;	
 			default:
 				printf("Unknown specifier: %s\n", specifier);
 				return;
