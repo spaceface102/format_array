@@ -5,7 +5,7 @@
 
 void clear_chars(int number);
 void repeat(char c, int number);
-void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier);
+void printarray(void *array, int array_size, int type_size, int max_chars, char *specifier);
 
 int main(void)
 {
@@ -13,7 +13,7 @@ int main(void)
 	printf(spec, 42);
 }
 
-void format_array_output(void *array, int array_size, int type_size, int max_chars, char *specifier)
+void printarray(void *array, int array_size, int type_size, int max_chars, char *specifier)
 {
 	/*void pointer for array, to accept any type of array
 	array_size necessary to ONLY access memory related to
