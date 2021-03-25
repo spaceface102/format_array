@@ -56,6 +56,8 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 						prev = printf(specifier, ((double *)array)[i]);
 					else if(specifier[2] == 'd')
 						prev = printf(specifier, ((long int *)array)[i]);
+					else if(specifier[2] == 'l')
+						prev = printf(specifier, ((long long int *)array)[i]);
 				}
 				break;
 			case 'u': 
@@ -74,6 +76,7 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 				printf("Unknown specifier: %s\n", specifier);
 				return;
 		}
+		//------------------------------------------------------------------------
 
 		prev += printf(", ");
 		j += prev;
@@ -86,6 +89,7 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 			new_line = printf("\n"); //will cause stdout flush and also new line!
 		}
 	}
+	//final clean up
 	if(!new_line)
 	{
 		clear_chars(2); //remove final ", " they are extra and should be removed
