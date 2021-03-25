@@ -38,6 +38,7 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 		return;
 	}
 
+	//------------------------------------------------------------------------
 	for(int i = 0, j = 0; i < array_size; i++)
 	{
 		//derefrence pointer correctly based on the specifier!
@@ -77,7 +78,6 @@ void format_array_output(void *array, int array_size, int max_chars, char *speci
 				return;
 		}
 		//------------------------------------------------------------------------
-
 		prev += printf(", ");
 		j += prev;
 		new_line = 0;
