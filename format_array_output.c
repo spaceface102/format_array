@@ -5,15 +5,17 @@
 
 void clear_chars(int number);
 void repeat(char c, int number);
-void printarray(void *array, int array_size, int type_size, int max_chars, char *specifier);
+void printarray(void *array, int array_size, int type_size, int max_chars_per_line, char *specifier);
 
 int main(void)
 {
-	char spec[] = "%d";
-	printf(spec, 42);
+	int array[1000];
+	for(int i = 0; i < 1000; i++)
+		array[i] = i;
+	printarray(array, 1000, sizeof(int), 80, "%d");
 }
 
-void printarray(void *array, int array_size, int type_size, int max_chars, char *specifier)
+void printarray(void *array, int array_size, int type_size, int max_chars_per_line, char *specifier)
 {
 	/*void pointer for array, to accept any type of array
 	array_size necessary to ONLY access memory related to
