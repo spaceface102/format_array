@@ -39,7 +39,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 	int new_line; //track if new_line
 	int (*custom_print)(char *specifier, void *array, unsigned long i);
 	//second specifier check
-	if (spec_len <= 1) //aka < 2
+	if (base_spec_len <= 1) //aka < 2
 	{
 		printf("Please make sure to provide more than just %% as specifier!!!\n");
 		return;
@@ -47,7 +47,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 
 	//derefrence pointer correctly based on the specifier!
 	//https://www.cplusplus.com/reference/cstdio/printf/ 
-	switch(specifier[1]) //already check specifier[0] && strlen
+	switch(base_specifier[1]) //already check specifier[0] && strlen
 	{
 		case 'd': case 'i': 
 			custom_print = print_int;
