@@ -93,9 +93,21 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 							break;
 						case 'u': case 'o': case 'x': case 'X':
 							prev = printf(specifier, ((unsigned short int *)array)[i]);
+							break; 
+						case 'h':	
+							if(spec_len == 4)
+							{
+								switch(specifier[3])
+								{
+									case 'd': case 'i':
+										prev = printf(specifier, ((signed char *)array)[i]);
+										break;
+									case 'u': case 'o': case 'x': case 'X':
+										prev = printf(specifier, ((unsigned char *)array)[i]);
+										break;
+								}
+							}
 							break;
-						case 'h':
-
 					}
 				}
 				break;
