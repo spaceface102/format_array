@@ -50,7 +50,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 		//https://www.cplusplus.com/reference/cstdio/printf/ 
 		switch(specifier[1]) //already check specifier[0] && strlen
 		{
-			case 'd': case 'i': case 'c':
+			case 'd': case 'i': 
 				prev = printf(specifier, ((int *)array)[i]);
 				break;
 			case 'u': case 'o': case 'x': case 'X':
@@ -75,17 +75,17 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 			case 'e': case 'E'://scientific notation
 				if (type_size == 8) //double is 8 bytes
 					prev = printf(specifier, ((double *)array)[i]);
-				if (type_size == 4) //float is 4 bytes
+				else if (type_size == 4) //float is 4 bytes
 					prev = printf(specifier, ((float *)array)[i]);
 				break;
 			case 'p': //pointer address
 				if (type_size == 8) //64 bit system
 					prev = printf(specifier, ((uint64_t *)array)[i]);
-				if (type_size == 4) //32 bit system
+				else if (type_size == 4) //32 bit system
 					prev = printf(specifier, ((uint32_t *)array)[i]);
-				if (type_size == 2) //16 bit system
+				else if (type_size == 2) //16 bit system
 					prev = printf(specifier, ((uint16_t *)array)[i]);
-				if (type_size == 1) //8 bit system
+				else if (type_size == 1) //8 bit system
 					prev = printf(specifier, ((uint8_t *)array)[i]);
 				break;	
 			case 'h':
