@@ -38,7 +38,7 @@ void format_array_output(void *array, int array_size, int type_size, int max_cha
 	}
 	if(!new_line)
 	{
-		clear_chars(2); //remove final ", "
+		clear_chars(2); //remove final ", " they are extra and should be removed
 		printf("\n");
 	}
 }
