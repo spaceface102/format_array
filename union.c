@@ -9,7 +9,7 @@ typedef union alltypes{
 	unsigned char uc;
 	float f;
 	double d;
-	long double ld; //largest type (12 bytes)
+	long double ld; //largest type (16 bytes in my system)
 	uint8_t u1; //influenced by numpy
 	uint16_t u2; //u# where # == num bytes
 	uint32_t u4;
@@ -28,8 +28,6 @@ int main(void)
 	alltypes x;
 	printf("%ld\n", sizeof(alltypes));
 	x.i = 100;
-	x &= 2;
-	printf("%d\n", x);
 	printf("%f\n", x.f);
 	printf("%d\n", x.i);
 	return 0;
