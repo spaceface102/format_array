@@ -2,11 +2,31 @@
 #include <ctype.h>
 #include <stdint.h>
 
-enum all_types{INT, UINT, CHAR, CHAR_P, UCHAR, FLOAT,
-			   DOUBLE, UINT8, UINT16, UINT32, UINT64,
-			   SHORT, USHORT, LONG, ULONG, LONG_LONG, 
-			   ULONG_LONG};
+enum enum_all_types{INT, UINT, CHAR, CHAR_P, UCHAR, FLOAT,
+				   DOUBLE, UINT8, UINT16, UINT32, UINT64,
+				   SHORT, USHORT, LONG, ULONG, LONG_LONG, 
+				   ULONG_LONG};
 
+typedef union alltypes{
+	int i;
+	unsigned int ui;
+	char c; //covers signed char too
+	char *cp; //char pointer for string handeling
+	unsigned char uc;
+	float f;
+	double d;
+	long double ld; //largest type (16 bytes in my system)
+	uint8_t u1; //influenced by numpy
+	uint16_t u2; //u# where # == num bytes
+	uint32_t u4;
+	uint64_t u8;
+	short h;
+	unsigned short uh;
+	long l;
+	unsigned long ul;
+	long long ll;
+	unsigned long long ull;
+} alltypes;
 
 /*maybe you can have four distinct 
 derefrencing modes, where you use a union
@@ -21,17 +41,14 @@ opposite will not be true, if you derefrence it
 with a type such as uint64_t since this sto*/
 
 typedef struct dynamic_type_array{
+	int current_type; //enum all_types
 	void *array;
 	unsigned int type_size;
 	unsigned long int array_size;
 	unsigned int *shape;
 	unsigned int dimension;
 	char *specifier; //specifier used for printf
-	/*implicitly states the type of array, that can
-	can now be changed dynamically by setting different
-	flags to it!!!*/
-	char *base_specifier; //no flags, width or .precision info
-	char len_spec; //len(base_specifier)
+	union all_types (*deref) 
 	//function pointer with return type as union of all types
 } dynamic_type_array;
 /*derefrencing will still need to be done inside 
