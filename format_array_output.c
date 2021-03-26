@@ -2,9 +2,10 @@
 #include <ctype.h>
 #include <stdint.h>
 
-enum all_types = {INT, UINT, CHAR, CHAR_P, UCHAR, FLOAT,
-				  DOUBLE, UINT8, UINT16, UINT32, UINT64,
-				  SHORT, USHORT, LONG, ULONG,
+enum all_types{INT, UINT, CHAR, CHAR_P, UCHAR, FLOAT,
+			   DOUBLE, UINT8, UINT16, UINT32, UINT64,
+			   SHORT, USHORT, LONG, ULONG, LONG_LONG, 
+			   ULONG_LONG};
 
 
 /*maybe you can have four distinct 
