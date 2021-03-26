@@ -15,7 +15,12 @@ typedef union alltypes{
 	unsigned char uc;
 	float f;
 	double d;
+	/*NOT SUPPORTED, not used often enough
 	long double ld; //largest type (16 bytes in my system)
+	not worth the size hit or the possible 
+	unoptimized nature since natural word
+	size of MOST modern cpus is 8 bytes not 
+	16 bytes...*/
 	uint8_t u1; //influenced by numpy
 	uint16_t u2; //u# where # == num bytes
 	uint32_t u4;
@@ -26,7 +31,7 @@ typedef union alltypes{
 	unsigned long ul;
 	long long ll;
 	unsigned long long ull;
-} alltypes;  //sizeof(alltypes) == 16
+} alltypes;  //sizeof(alltypes) == 8
 
 /*maybe you can have four distinct 
 derefrencing modes, where you use a union
