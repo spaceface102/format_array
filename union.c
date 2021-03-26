@@ -23,7 +23,9 @@ typedef union alltypes{
 
 int main(void)
 {	
+
 	alltypes x;
+	printf("%ld\n", sizeof(alltypes));
 	x.f = 83e3;
 	printf("%f\n", x.f);
 	printf("%d\n", x.i);
