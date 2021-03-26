@@ -16,23 +16,27 @@ pointer, dp_array+1 != array+1 but array+array_size
 I could make a recursive function that terminates when dimension == 0*/
 
 //-----ONLY USED TO DEFINE FUNCTION POINTER IN printarray()-----//
-int void_deref_int(void *array, unsigned long i);
-int void_deref_uint(void *array, unsigned long i);
-int void_deref_char(void *array, unsigned long i);
-int void_deref_signed_char(void *array, unsigned long i);
-int void_deref_unsigned_char(void *array, unsigned long i);
-int void_deref_float(void *array, unsigned long i);
-int void_deref_double(void *array, unsigned long i);
-int void_deref_uint8(void *array, unsigned long i);
-int void_deref_uint16(void *array, unsigned long i);
-int void_deref_uint32(void *array, unsigned long i);
-int void_deref_uint64(void *array, unsigned long i);
-int void_deref_short_int(void *array, unsigned long i);
-int void_deref_unsigned_short_int(void *array, unsigned long i);
-int void_deref_long_int(void *array, unsigned long i);
-int void_deref_unsigned_long_int(void *array, unsigned long i);
-int void_deref_long_long_int(void *array, unsigned long i);
-int void_deref_unsigned_long_long_int(void *array, unsigned long i);
+int void_deref_int(void *array, unsigned long i)
+unsigned int void_deref_uint(void *array, unsigned long i)
+char void_deref_char(void *array, unsigned long i)
+//notice *void_der... instead of above void_der...
+/*may be able to ommit this if I can get the whole dimensionality thing
+working correctly. Would have to make sure to not insert ", " between 
+every character though, so it might be easier to just treat it as a special case */
+char* void_deref_char_array(void *array, unsigned long i) //char array ex. "%s"
+unsigned char void_deref_unsigned_char(void *array, unsigned long i)
+float void_deref_float(void *array, unsigned long i)
+double void_deref_double(void *array, unsigned long i)
+uint8_t void_deref_uint8(void *array, unsigned long i)
+uint16_t void_deref_uint16(void *array, unsigned long i)
+uint32_t void_deref_uint32(void *array, unsigned long i)
+uint64_t void_deref_uint64(void *array, unsigned long i)
+short int void_deref_short_int(void *array, unsigned long i)
+unsigned short int void_deref_unsigned_short_int(void *array, unsigned long i)
+long int void_deref_long_int(void *array, unsigned long i)
+unsigned long int void_deref_unsigned_long_int(void *array, unsigned long i)
+long long int void_deref_long_long_int(void *array, unsigned long i)
+unsigned long long int void_deref_unsigned_long_long_int(void *array, unsigned long i)
 //end of function pointer inteneded functions
 
 int main(void)
@@ -249,3 +253,57 @@ void repeat(char c, int number)
 
 
 //----------------LIST OF SLIGHTLY DIFFRENT FUNCS, USED FOR FUNC *-----------------
+int void_deref_int(void *array, unsigned long i)
+	{return ((int *)array)[i];}
+
+unsigned int void_deref_uint(void *array, unsigned long i)
+	{return ((unsigned int *)array)[i];}
+
+char void_deref_char(void *array, unsigned long i)
+	{return ((char *)array)[i];}
+
+//notice *void_der... instead of above void_der...
+/*may be able to ommit this if I can get the whole dimensionality thing
+working correctly. Would have to make sure to not insert ", " between 
+every character though, so it might be easier to just treat it as a special case */
+char* void_deref_char_array(void *array, unsigned long i) //char array ex. "%s"
+	{return ((char *)array)[i];}
+
+unsigned char void_deref_unsigned_char(void *array, unsigned long i)
+	{return ((unsigned char *)array)[i];}
+
+float void_deref_float(void *array, unsigned long i)
+	{return ((float *)array)[i];}
+
+double void_deref_double(void *array, unsigned long i)
+	{return ((double *)array)[i];}
+
+uint8_t void_deref_uint8(void *array, unsigned long i)
+	{return ((uint8_t *)array)[i];}
+
+uint16_t void_deref_uint16(void *array, unsigned long i)
+	{return ((uint16_t *)array)[i];}
+
+uint32_t void_deref_uint32(void *array, unsigned long i)
+	{return ((uint32_t *)array)[i];}
+
+uint64_t void_deref_uint64(void *array, unsigned long i)
+	{return ((uint64_t *)array)[i];}
+
+short int void_deref_short_int(void *array, unsigned long i)
+	{return ((short int *)array)[i];}
+
+unsigned short int void_deref_unsigned_short_int(void *array, unsigned long i)
+	{return ((unsigned short int *)array)[i];}
+
+long int void_deref_long_int(void *array, unsigned long i)
+	{return ((long int *)array)[i];}
+
+unsigned long int void_deref_unsigned_long_int(void *array, unsigned long i)
+	{return ((unsigned long int *)array)[i];}
+
+long long int void_deref_long_long_int(void *array, unsigned long i)
+	{return ((long long int *)array)[i];}
+
+unsigned long long int void_deref_unsigned_long_long_int(void *array, unsigned long i)
+	{return ((unsigned long long int *)array)[i];}
