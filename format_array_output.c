@@ -2,6 +2,23 @@
 #include <ctype.h>
 #include <stdint.h>
 
+enum all_types = {INT, UINT, CHAR, CHAR_P, UCHAR, FLOAT,
+				  DOUBLE, UINT8, UINT16, UINT32, UINT64,
+				  SHORT, USHORT, LONG, ULONG,
+
+
+/*maybe you can have four distinct 
+derefrencing modes, where you use a union
+Whenever you you need to store a value.
+When storing a 8 byte number, use the part
+of the union with a double. You might think
+that this will result in a problem where if it
+is an integer type, it will be stored incorrectly
+BUT, since it is a union, the same data will be
+stored as expeceted in it's integer from. The
+opposite will not be true, if you derefrence it
+with a type such as uint64_t since this sto*/
+
 typedef struct dynamic_type_array{
 	void *array;
 	unsigned int type_size;
@@ -16,7 +33,10 @@ typedef struct dynamic_type_array{
 	char len_spec; //len(base_specifier)
 } dynamic_type_array;
 /*derefrencing will still need to be done inside 
-the the function that will accept variable*/
+the the function that will accept variable, probably 
+implementing a function pointer, since other wise would
+have to implement muliple diffrent dynamic_type_array
+which would */
 
 
 void clear_chars(int number);
