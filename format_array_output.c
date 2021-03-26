@@ -8,7 +8,7 @@ typedef struct printable_array{
 	unsigned long int array_size;
 	unsigned int *shape;
 	unsigned int dimension;
-	char *specifier;
+	char *specifier; //specifier used for printf
 	char *base_specifier; //no flags, width or .precision info
 } printable_array;
 
