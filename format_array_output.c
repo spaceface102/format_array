@@ -3,47 +3,21 @@
 #include <stdint.h>
 
 enum enum_all_types{INT, UINT, CHAR, CHAR_P, UCHAR, FLOAT,
-				    DOUBLE, UINT8, UINT16, UINT32, UINT64,
-				    SHORT, USHORT, LONG, ULONG, LONG_LONG, 
-				    ULONG_LONG};
+				    DOUBLE, LDOUBLE, UINT8, UINT16, UINT32, 
+					UINT64,SHORT, USHORT, LONG, ULONG, 
+					LONG_LONG, ULONG_LONG};
 
-typedef union alltypes{
-	int i;
-	unsigned int ui;
-	char c; //covers signed char too
-	char *cp; //char pointer for string handeling
-	unsigned char uc;
-	float f;
-	double d;
-	/*NOT SUPPORTED, not used often enough
-		long double ld; 
-	not worth the size hit or the possible 
-	unoptimized nature since natural word
-	size of MOST modern cpus is 8 bytes not 
-	16 bytes...*/
-	uint8_t u1; //influenced by numpy
-	uint16_t u2; //u# where # == num bytes
-	uint32_t u4;
-	uint64_t u8;
-	short h;
-	unsigned short uh;
-	long l;
-	unsigned long ul;
-	long long ll;
-	unsigned long long ull;
-} alltypes;  //sizeof(alltypes) == 8
-
-/*maybe you can have four distinct 
-derefrencing modes, where you use a union
-Whenever you you need to store a value.
-When storing a 8 byte number, use the part
-of the union with a double. You might think
-that this will result in a problem where if it
-is an integer type, it will be stored incorrectly
-BUT, since it is a union, the same data will be
-stored as expeceted in it's integer from. The
-opposite will not be true, if you derefrence it
-with a type such as uint64_t since this sto*/
+	/*maybe you can have four distinct 
+	derefrencing modes, where you use a union
+	Whenever you you need to store a value.
+	When storing a 8 byte number, use the part
+	of the union with a double. You might think
+	that this will result in a problem where if it
+	is an integer type, it will be stored incorrectly
+	BUT, since it is a union, the same data will be
+	stored as expeceted in it's integer from. The
+	opposite will not be true, if you derefrence it
+	with a type such as uint64_t since this sto*/
 
 typedef struct dynamic_type_array{
 	int current_type; //enum all_types
