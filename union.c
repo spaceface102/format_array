@@ -29,3 +29,4 @@ int main(void)
 	printf("%d\n", x.i);
 	return 0;
 }
+
