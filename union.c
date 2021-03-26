@@ -5,7 +5,7 @@ typedef union alltypes{
 	int i;
 	unsigned int ui;
 	char c;
-	char *cp; //char pointer
+	char *cp; //char pointer for string handeling
 	unsigned char uc;
 	float f;
 	double d;
