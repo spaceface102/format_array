@@ -2,23 +2,28 @@
 #include <ctype.h>
 #include <stdint.h>
 
-typedef struct printable_array{
+typedef struct dynamic_type_array{
 	void *array;
 	unsigned int type_size;
 	unsigned long int array_size;
 	unsigned int *shape;
 	unsigned int dimension;
 	char *specifier; //specifier used for printf
+	/*implicitly states the type of array, that can
+	can now be changed dynamically by setting different
+	flags to it!!!*/
 	char *base_specifier; //no flags, width or .precision info
 	char len_spec; //len(base_specifier)
-} printable_array;
+} dynamic_type_array;
+/*derefrencing will still need to be done inside 
+the the function that will accept variable*/
 
 
 void clear_chars(int number);
 void repeat(char c, int number);
 int specifier_strip(char *specifier, char *base_specifier, int size_base);
 void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier);
-/* Maybe the answer to this, is to have a STRUCT called 'printable array' where 
+/* Maybe the answer to this, is to have a STRUCT called 'dynamic type array' where 
 if you want to use this function you need to have set the array data inside
 the struct. The struct would include a void pointer to an array, the array size
 would be one dimensional, meaning even if array is two dimensional like 
