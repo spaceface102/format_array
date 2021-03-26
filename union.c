@@ -9,6 +9,7 @@ typedef union alltypes{
 	unsigned char uc;
 	float f;
 	double d;
+	long double ld; //largest type (12 bytes)
 	uint8_t u1; //influenced by numpy
 	uint16_t u2; //u# where # == num bytes
 	uint32_t u4;
