@@ -18,11 +18,13 @@ typedef union alltypes{
 	unsigned long int ul;
 	long long int ll;
 	unsigned long long int ull;
-
 } alltypes;
 
 int main(void)
 {	
-	
+	alltypes x;
+	x.f = 83e3;
+	printf("%f\n", x.f);
+	printf("%d\n", x.i);
 	return 0;
 }
