@@ -7,23 +7,23 @@ void repeat(char c, int number);
 int specifier_strip(char *specifier, char *base_specifier, int size_base);
 void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier);
 //-----ONLY USED TO DEFINE FUNCTION POINTER IN printarray()-----//
-int print_int(char *specifier, void *array, unsigned long i);
-int print_uint(char *specifier, void *array, unsigned long i);
-int print_char(char *specifier, void *array, unsigned long i);
-int print_uint8(char *specifier, void *array, unsigned long i);
-int print_float(char *specifier, void *array, unsigned long i);
-int print_double(char *specifier, void *array, unsigned long i);
-int print_uint16(char *specifier, void *array, unsigned long i);
-int print_uint32(char *specifier, void *array, unsigned long i);
-int print_uint64(char *specifier, void *array, unsigned long i);
-int print_long_int(char *specifier, void *array, unsigned long i);
-int print_short_int(char *specifier, void *array, unsigned long i);
-int print_signed_char(char *specifier, void *array, unsigned long i);
-int print_unsigned_char(char *specifier, void *array, unsigned long i);
-int print_long_long_int(char *specifier, void *array, unsigned long i);
-int print_unsigned_long_int(char *specifier, void *array, unsigned long i);
-int print_unsigned_short_int(char *specifier, void *array, unsigned long i);
-int print_unsigned_long_long_int(char *specifier, void *array, unsigned long i);
+int void_deref_int(void *array, unsigned long i);
+int void_deref_uint(void *array, unsigned long i);
+int void_deref_char(void *array, unsigned long i);
+int void_deref_uint8(void *array, unsigned long i);
+int void_deref_float(void *array, unsigned long i);
+int void_deref_double(void *array, unsigned long i);
+int void_deref_uint16(void *array, unsigned long i);
+int void_deref_uint32(void *array, unsigned long i);
+int void_deref_uint64(void *array, unsigned long i);
+int void_deref_long_int(void *array, unsigned long i);
+int void_deref_short_int(void *array, unsigned long i);
+int void_deref_signed_char(void *array, unsigned long i);
+int void_deref_unsigned_char(void *array, unsigned long i);
+int void_deref_long_long_int(void *array, unsigned long i);
+int void_deref_unsigned_long_int(void *array, unsigned long i);
+int void_deref_unsigned_short_int(void *array, unsigned long i);
+int void_deref_unsigned_long_long_int(void *array, unsigned long i);
 //end of function pointer inteneded functions
 
 int main(void)
@@ -56,7 +56,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 	}
 
 	//------------------------------------------------------------------------
-	int (*custom_print)(char *specifier, void *array, unsigned long i);
+	int (*deref_void)(void *array, unsigned long i);
 	//second specifier check
 	if (base_spec_len <= 1) //aka < 2
 	{
@@ -240,52 +240,52 @@ void repeat(char c, int number)
 
 //----------------LIST OF SLIGHTLY DIFFRENT FUNCS, USED FOR FUNC *-----------------
 int print_int(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((int *)array)[i]);}
+	{return ((int *)array)[i];}
 
 int print_uint(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((unsigned int *)array)[i]);}
+	{return ((unsigned int *)array)[i];}
 
 int print_char(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((char *)array)[i]);}
+	{return ((char *)array)[i];}
 
 int print_float(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((float *)array)[i]);}
+	{return ((float *)array)[i];}
 
 int print_double(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((double *)array)[i]);}
+	{return ((double *)array)[i];}
 
 int print_uint8(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((uint8_t *)array)[i]);}
+	{return ((uint8_t *)array)[i];}
 
 int print_uint16(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((uint16_t *)array)[i]);}
+	{return ((uint16_t *)array)[i];}
 
 int print_uint32(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((uint32_t *)array)[i]);}
+	{return ((uint32_t *)array)[i];}
 
 int print_uint64(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((uint64_t *)array)[i]);}
+	{return ((uint64_t *)array)[i];}
 
 int print_short_int(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((short int *)array)[i]);}
+	{return ((short int *)array)[i];}
 
 int print_unsigned_short_int(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((unsigned short int *)array)[i]);}
+	{return ((unsigned short int *)array)[i];}
 
 int print_signed_char(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((signed char *)array)[i]);}
+	{return ((signed char *)array)[i];}
 
 int print_unsigned_char(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((unsigned char *)array)[i]);}
+	{return ((unsigned char *)array)[i];}
 
 int print_long_int(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((long int *)array)[i]);}
+	{return ((long int *)array)[i];}
 
 int print_unsigned_long_int(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((unsigned long int *)array)[i]);}
+	{return ((unsigned long int *)array)[i];}
 
 int print_long_long_int(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((long long int *)array)[i]);}
+	{return ((long long int *)array)[i];}
 
 int print_unsigned_long_long_int(char *specifier, void *array, unsigned long i /*index*/)
-	{return printf(specifier, ((unsigned long long int *)array)[i]);}
+	{return ((unsigned long long int *)array)[i];}
