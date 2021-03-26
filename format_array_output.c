@@ -32,6 +32,7 @@ typedef struct dynamic_type_array{
 	flags to it!!!*/
 	char *base_specifier; //no flags, width or .precision info
 	char len_spec; //len(base_specifier)
+	//function pointer with return type as union of all types
 } dynamic_type_array;
 /*derefrencing will still need to be done inside 
 the the function that will accept variable, probably 
