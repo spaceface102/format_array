@@ -10,6 +10,7 @@ typedef struct printable_array{
 	unsigned int dimension;
 	char *specifier; //specifier used for printf
 	char *base_specifier; //no flags, width or .precision info
+	char len_spec; //len(base_specifier)
 } printable_array;
 
 
