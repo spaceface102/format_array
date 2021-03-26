@@ -27,7 +27,7 @@ int main(void)
 	alltypes x;
 	printf("%ld\n", sizeof(alltypes));
 	x.i = 100;
-	x += 2;
+	x &= 2;
 	printf("%d\n", x);
 	printf("%f\n", x.f);
 	printf("%d\n", x.i);
