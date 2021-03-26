@@ -26,7 +26,7 @@ typedef union alltypes{
 	unsigned long ul;
 	long long ll;
 	unsigned long long ull;
-} alltypes;
+} alltypes;  //sizeof(alltypes) == 16
 
 /*maybe you can have four distinct 
 derefrencing modes, where you use a union
