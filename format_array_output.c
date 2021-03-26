@@ -3,9 +3,9 @@
 #include <stdint.h>
 
 enum enum_all_types{INT, UINT, CHAR, CHAR_P, UCHAR, FLOAT,
-				   DOUBLE, UINT8, UINT16, UINT32, UINT64,
-				   SHORT, USHORT, LONG, ULONG, LONG_LONG, 
-				   ULONG_LONG};
+				    DOUBLE, UINT8, UINT16, UINT32, UINT64,
+				    SHORT, USHORT, LONG, ULONG, LONG_LONG, 
+				    ULONG_LONG};
 
 typedef union alltypes{
 	int i;
