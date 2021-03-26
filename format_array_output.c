@@ -2,18 +2,42 @@
 #include <ctype.h>
 #include <stdint.h>
 
+typedef struct printable_array{
+	void *array;
+	unsigned int type_size;
+	unsigned long int array_size;
+	unsigned int *shape;
+	unsigned int dimension;
+	char *specifier;
+} printable_array;
+
+
 void clear_chars(int number);
 void repeat(char c, int number);
 int specifier_strip(char *specifier, char *base_specifier, int size_base);
 void printarray(void *array, unsigned long array_size, int type_size, int max_chars_per_line, char *specifier);
-/*figure out a way to add dimensionality 
-maybe by asking dimension of array, can use multi level pointers 
-and therefore look at value of pointer and deduce the size, using
-as well the infromation ot type_size. since array is passed as pointer
-array+1 will access the next address space which will be equivalent
-to array+type_size. If we are using a pointer to an array, aka double
-pointer, dp_array+1 != array+1 but array+array_size
-I could make a recursive function that terminates when dimension == 0*/
+/* Maybe the answer to this, is to have a STRUCT called 'printable array' where 
+if you want to use this function you need to have set the array data inside
+the struct. The struct would include a void pointer to an array, the array size
+would be one dimensional, meaning even if array is two dimensional like 
+array[10][5], the "real" size, and what would be set as array_size = 10*5 or 50.
+This information would be stored in a "shape" variable (simlar to that with numpy)
+and will be an array of integers representing the size of the array. For example,
+array[42][5][90] would have shape = {42, 5, 90}; therefore the shape variable
+will also be a void pointer. The size of the "shape" array will be denoted by 
+variable "dimension" which in this case would be equal to 3 (since 3 "nested"
+arrays). The struct would also include "type_size" which == sizeof(type) of array.
+The last piece of information would be the char *specifier, which would allow
+for all the printing to act nice.*/
+
+	/*figure out a way to add dimensionality 
+	maybe by asking dimension of array, can use multi level pointers 
+	and therefore look at value of pointer and deduce the size, using
+	as well the infromation ot type_size. since array is passed as pointer
+	array+1 will access the next address space which will be equivalent
+	to array+type_size. If we are using a pointer to an array, aka double
+	pointer, dp_array+1 != array+1 but array+array_size
+	I could make a recursive function that terminates when dimension == 0*/
 
 //-----ONLY USED TO DEFINE FUNCTION POINTER IN printarray()-----//
 int void_deref_int(void *array, unsigned long i)
@@ -70,6 +94,8 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 
 	//------------------------------------------------------------------------
 	int (*deref_void)(void *array, unsigned long i);
+	/*better solution might be to use some sort of function pointer
+	array...IDK yet, but think about it more!*/
 	//second specifier check
 	if (base_spec_len <= 1) //aka < 2
 	{
