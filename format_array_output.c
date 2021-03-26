@@ -16,7 +16,7 @@ typedef union alltypes{
 	float f;
 	double d;
 	/*NOT SUPPORTED, not used often enough
-	long double ld; //largest type (16 bytes in my system)
+		long double ld; 
 	not worth the size hit or the possible 
 	unoptimized nature since natural word
 	size of MOST modern cpus is 8 bytes not 
