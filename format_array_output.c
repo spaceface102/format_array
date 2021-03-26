@@ -184,6 +184,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 	int curr; //num of chars from last print
 	int new_line; //track if new_line
 	
+	printf("["); //[array indicies...]
 	for(unsigned long int i = 0, j = 0; i < array_size; i++)
 	{
 		curr = 0;
@@ -207,7 +208,7 @@ void printarray(void *array, unsigned long array_size, int type_size, int max_ch
 	if(!new_line)
 	{
 		clear_chars(2); //remove final ", " they are extra and should be removed
-		printf("\n");
+		printf("]\n");
 	}
 }
 
