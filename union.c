@@ -4,7 +4,7 @@
 typedef union alltypes{
 	int i;
 	unsigned int ui;
-	char c;
+	char c; //covers signed char too
 	char *cp; //char pointer for string handeling
 	unsigned char uc;
 	float f;
@@ -16,10 +16,10 @@ typedef union alltypes{
 	uint64_t u8;
 	short h;
 	unsigned short uh;
-	long int l;
-	unsigned long int ul;
-	long long int ll;
-	unsigned long long int ull;
+	long l;
+	unsigned long ul;
+	long long ll;
+	unsigned long long ull;
 } alltypes;
 
 int main(void)

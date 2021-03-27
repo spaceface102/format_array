@@ -23,12 +23,9 @@ typedef struct dynamic_type_array{
 	int current_type; //enum all_types
 	void *array;
 	unsigned int type_size;
-	unsigned long int array_size;
+	unsigned long array_size;
 	unsigned int *shape;
 	unsigned int dimension;
-	char *specifier; //specifier used for printf
-	union all_types (*deref) 
-	//function pointer with return type as union of all types
 } dynamic_type_array;
 /*derefrencing will still need to be done inside 
 the the function that will accept variable, probably 
